@@ -2,7 +2,7 @@
 ![Swift](https://img.shields.io/badge/Swift-5.0-orange.svg)
 [![Build Status](https://travis-ci.org/devxoul/Then.svg?branch=master)](https://travis-ci.org/devxoul/Then)
 
-✨ Add associated property  for extension of class or protocol
+✨ Add associated property  for extension of protocol or class
 
 
 ## At a Glance
@@ -18,11 +18,11 @@ protocol FullNamed: class {
 extension FullNamed where Self: AssociatedCompatible {
     var name: String {
         get {
-            return self.associated.value() as? String ?? ""
+            return self.associated.value(default: "")
         }
         
         set {
-            self.associated.setValue(newValue as Any)
+            self.associated.setValue(newValue)
         }
     }
 }
@@ -49,13 +49,13 @@ extension Animal: FullNamed {
 }
 
 extension Animal {
-    var age: Int {
+    var age: Int? {
         get {
-            return self.associated.value() as? Int ?? 0
+            return self.associated.value()
         }
         
         set {
-            self.associated.setValue(newValue as Any)
+            self.associated.setValue(newValue)
         }
     }
 }

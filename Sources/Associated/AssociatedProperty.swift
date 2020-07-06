@@ -94,9 +94,10 @@ final public class AssociatedProperty<Object, Value> where Object: AnyObject {
 
         let weakKey = Weak(object)
         let hook = DeallocHook(handler: { [weak self] in
-            self?.lock.lock()
-            self?.storage.removeValue(forKey: weakKey)
-            self?.lock.unlock()
+            guard let self = self else {return}
+            self.lock.lock()
+            self.storage.removeValue(forKey: weakKey)
+            self.lock.unlock()
         })
         objc_setAssociatedObject(object, &deallocHookKey, hook, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
@@ -135,6 +136,7 @@ private final class DeallocHook {
   }
 }
 
+// MARK: DictionaryWrapper
 private final class DictionaryWrapper<Value> {
     var dictionary: Dictionary<String, Value>
     

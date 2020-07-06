@@ -33,11 +33,11 @@ protocol FullNamed: class {
 extension FullNamed where Self: AssociatedCompatible {
     var name: String {
         get {
-            return self.associated.value() as? String ?? ""
+            return self.associated.value(default: "")
         }
         
         set {
-            self.associated.setValue(newValue as Any)
+            self.associated.setValue(newValue)
         }
     }
 }
@@ -55,13 +55,13 @@ extension Animal: FullNamed {
 
 // 给扩展添加存储属性
 extension Animal {
-    var age: Int {
+    var age: Int? {
         get {
-            return self.associated.value() as? Int ?? 0
+            return self.associated.value()
         }
         
         set {
-            self.associated.setValue(newValue as Any)
+            self.associated.setValue(newValue)
         }
     }
 }
