@@ -6,16 +6,18 @@ final class AssociatedTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        let person: PersonProtocol = Person()
+        
+        //
+        let person: FullNamed = Person()
         person.name = "roger"
         let name = person.name
         XCTAssertEqual(name, "roger")
         
         
         let animal = Animal()
-        animal.name = "tiger"
-        let animalName = animal.name;
-        XCTAssertEqual(animalName, "tiger")
+        animal.age = 100;
+        let age = animal.age
+        XCTAssertEqual(age, 100)
     }
 
     static var allTests = [
@@ -23,11 +25,12 @@ final class AssociatedTests: XCTestCase {
     ]
 }
 
-protocol PersonProtocol: class {
+protocol FullNamed: class {
     var name: String {get set}
 }
 
-extension PersonProtocol where Self: AssociatedCompatible {
+// 给协议添加存储属性
+extension FullNamed where Self: AssociatedCompatible {
     var name: String {
         get {
             return self.associated.value() as? String ?? ""
@@ -39,14 +42,22 @@ extension PersonProtocol where Self: AssociatedCompatible {
     }
 }
 
-class Person: PersonProtocol, AssociatedCompatible {
+class Person: FullNamed, AssociatedCompatible {
     
 }
 
 class Animal: NSObject {
-    var name: String? {
+}
+
+extension Animal: FullNamed {
+    
+}
+
+// 给扩展添加存储属性
+extension Animal {
+    var age: Int {
         get {
-            return self.associated.value() as? String
+            return self.associated.value() as? Int ?? 0
         }
         
         set {
