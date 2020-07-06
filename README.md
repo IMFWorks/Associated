@@ -10,17 +10,11 @@
 Add associated property  for extension of protocol
 
 ```swift
-let person: FullNamed = Person()
-person.name = "roger"
-let name = person.name
-XCTAssertEqual(name, "roger")
-
 
 protocol FullNamed: class {
     var name: String {get set}
 }
 
-// 给协议添加存储属性
 extension FullNamed where Self: AssociatedCompatible {
     var name: String {
         get {
@@ -37,6 +31,10 @@ class Person: FullNamed, AssociatedCompatible {
     
 }
 
+let person: FullNamed = Person()
+person.name = "roger"
+let name = person.name
+XCTAssertEqual(name, "roger")
 ```
 
 ## Tips and Tricks
@@ -44,19 +42,12 @@ class Person: FullNamed, AssociatedCompatible {
 - You can use `Associated` to all of `NSObject` subclasses.
 
 ```swift
-    
-let animal = Animal()
-animal.age = 100;
-let age = animal.age
-XCTAssertEqual(age, 100)
-       
 class Animal: NSObject {
 }
 
 extension Animal: FullNamed {
 }
 
-// 给扩展添加存储属性
 extension Animal {
     var age: Int {
         get {
@@ -68,6 +59,11 @@ extension Animal {
         }
     }
 }
+
+let animal = Animal()
+animal.age = 100;
+let age = animal.age
+XCTAssertEqual(age, 100)
 ```
 
 ## Installation
