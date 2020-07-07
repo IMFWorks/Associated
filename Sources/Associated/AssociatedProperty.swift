@@ -43,14 +43,9 @@ final public class AssociatedProperty<Object, Value> where Object: AnyObject {
         }
 
         let defaultValue = `default`()
-        self.unsafeSetValue(defaultValue, forName: name, forObject: weakObject)
         return defaultValue
     }
-
-    public func forceCastedValue<T>(fromObject object: Object, forName name: String, default: @autoclosure () -> T) -> T {
-        return self.value(fromObject: object, forName: name, default: `default`() as! Value) as! T
-    }
-
+    
     public func setValue(_ value: Value?, forName name: String, forObject object: Object) {
         let weakObject = Weak(object)
         self.lock.lock()

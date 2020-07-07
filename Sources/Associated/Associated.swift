@@ -10,7 +10,7 @@ public struct Associated<Base> where Base: AnyObject {
 
 extension Associated {
     public func setValue<T>(_ value: T, forName name: String = #function) {
-        return AssociatedPropertys.globalAssociatedPropertys.setValue(value, forName:name , forObject: base)
+        return AssociatedPropertys.globalAssociatedPropertys.setValue(value, forName: name , forObject: base)
     }
     
     public func value<T>(default: @autoclosure () -> T, forName name: String = #function) -> T {
@@ -18,7 +18,7 @@ extension Associated {
     }
     
     public func setValue<T>(_ value: T?, forName name: String = #function) {
-        return AssociatedPropertys.globalAssociatedPropertys.setValue(value, forName:name , forObject: base)
+        return AssociatedPropertys.globalAssociatedPropertys.setValue(value, forName: name , forObject: base)
     }
     
     public func value<T>(forName name: String = #function) -> T? {
