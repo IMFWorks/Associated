@@ -13,6 +13,7 @@ extension Associated {
         return AssociatedPropertys.globalAssociatedPropertys.setValue(value, forName: name , forObject: base)
     }
     
+    // Returns the value for the given name, or default value if associatedPropertys does not has a value associated with name and save default value for name once.
     public func value<T>(default: @autoclosure () -> T, forName name: String = #function) -> T {
         return AssociatedPropertys.globalAssociatedPropertys.value(fromObject: base, forName: name, default: `default`()) as! T
     }

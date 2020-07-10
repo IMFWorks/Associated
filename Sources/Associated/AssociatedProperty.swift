@@ -43,6 +43,7 @@ final public class AssociatedProperty<Object, Value> where Object: AnyObject {
         }
 
         let defaultValue = `default`()
+        self.unsafeSetValue(defaultValue, forName: name, forObject: weakObject)
         return defaultValue
     }
     
