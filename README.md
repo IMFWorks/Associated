@@ -76,7 +76,7 @@ import PackageDescription
 let package = Package(
   name: "MyAwesomeApp",
   dependencies: [
-    .Package(url: "https://github.com/ATeamMac2014/Associated", majorVersion: 1),
+    .Package(url: "https://github.com/IMFWorks/Associated", majorVersion: 1),
   ]
 )
 ```
